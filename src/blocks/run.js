@@ -23,10 +23,9 @@ Blockly.JavaScript.Run = (block) => {
   if (typeof statement === 'undefined' || statement === '') {
     return '';
   } else {
-    return `async function run() { 
+    return `(async function() { 
       ${statement}
-    };
-    run();`;
+    })();\n`;
   }
 };
 
