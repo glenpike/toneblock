@@ -1,6 +1,8 @@
+const { Block } = require('blockly');
 const Blockly = require('blockly');
 Blockly.Msg.SYNTH_HUE = 307;
 Blockly.Msg.NOTE_HUE = 168;
+Blockly.Msg.FX_HUE = 235;
 
 const Tone = require('tone');
 const blocks = require('./blocks');
@@ -34,6 +36,8 @@ window.onload = () => {
         toolbox: toolbox,
         renderer: 'zelos',
         theme: 'toneblock',
+        scrollbars: true,
+        trashcan: true,
     });
     const workspaceBlocks = document.getElementById('workspaceBlocks');
     Blockly.Xml.domToWorkspace(workspaceBlocks, workspace);

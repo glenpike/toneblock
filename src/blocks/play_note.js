@@ -1,12 +1,6 @@
 const Blockly = require('blockly');
 const Tone = require('tone');
 
-const shapeOptions = [
-  ["sine","sine"],
-  ["square","square1"],
-  ["triangle","triangle1"],
-  ["sawtooth","sawtooth1"]
-]
 Blockly.Blocks.PlayNote = {
   message0: "Play Note: %1 for %2",
   args0: [

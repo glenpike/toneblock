@@ -5,20 +5,40 @@
 </head>
 <body>
   <script src="bundle.js"></script>
-  <div id="blocklyDiv" style="width:1024px;height:480px;"></div>
+  <div id="blocklyDiv" style="width:1200px;height:480px;"></div>
   <xml id="toolbox" style="display: none">
-    <block type="Run"></block>
-    <block type="ToneSynth"></block>
-    <block type="PlayNote"></block>
-    <block type="Rest"></block>
-    <block type="controls_repeat_ext">
-      <value name="TIMES">
-        <block type="math_number">
-          <field name="NUM">4</field>
-        </block>
-      </value>
-    </block>
-        <block type="controls_flow_statements"></block>
+    <category name="Sound Generators" expanded="true" colour="%{BKY_SYNTH_HUE}">
+      <block type="ToneSynth"></block>
+      <block type="MembraneSynth"></block>  
+    </category>
+    <category name="Sound Effects" colour="%{BKY_FX_HUE}">
+      <block type="FeedbackDelay"></block>
+    </category>
+    <category name="Notes" colour="%{BKY_NOTE_HUE}">
+      <block type="PlayNote"></block>
+      <block type="Rest"></block>
+    </category>
+    <category name="Control" colour="%{BKY_LOOPS_HUE}">
+      <block type="Connect"></block>
+      <block type="Run"></block>
+      <block type="controls_repeat_ext">
+        <value name="TIMES">
+          <block type="math_number">
+            <field name="NUM">4</field>
+          </block>
+        </value>
+      </block>
+      <block type="controls_whileUntil">
+        <value name="BOOL">
+          <block type="logic_boolean">
+            <field name="BOOL">TRUE</field>
+          </value>
+        </field>
+      </block>
+      <block type="controls_flow_statements"></block>
+    </category>
+    <category name="Variables" custom="VARIABLE" colour="%{BKY_VARIABLES_HUE}">
+    </category>
   </xml>
   <xml id="workspaceBlocks" style="display: none">
     <block type="Run"></block>
