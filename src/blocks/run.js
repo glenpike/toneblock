@@ -1,22 +1,16 @@
 const Blockly = require('blockly');
-// const Tone = require('tone');
 
-// const shapeOptions = [
-//   ["sine","sine"],
-//   ["square","square1"],
-//   ["triangle","triangle1"],
-//   ["sawtooth","sawtooth1"]
-// ]
 Blockly.Blocks.Run = {
-  "type": "Run",
-  "message0": "%1",
-  "args0": [
+  type: 'Run',
+  message0: 'Run: %1',
+  args0: [
     {
-      "type": "input_statement",
-      "name": "Code"
+      type: 'input_statement',
+      name: 'Code'
     }
   ],
-  "inputsInline": true,
+  colour: '%{BKY_PROCEDURES_HUE}',
+  inputsInline: false,
 }
 
 Blockly.Blocks.Run.init = function () {
@@ -26,8 +20,8 @@ Blockly.Blocks.Run.init = function () {
 Blockly.JavaScript.Run = (block) => {
   const statement = Blockly.JavaScript.statementToCode(block, 'Code')
   console.log('statement ', statement)
-  if (typeof statement === "undefined" || statement === '') {
-    return "";
+  if (typeof statement === 'undefined' || statement === '') {
+    return '';
   } else {
     return `async function run() { 
       ${statement}

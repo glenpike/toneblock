@@ -8,19 +8,15 @@ const shapeOptions = [
   ["sawtooth","sawtooth"]
 ]
 Blockly.Blocks.ToneSynth = {
-  message0: "set frequency to %1, shape to %2",
+  message0: "Tone.Synth - wave type: %1",
   args0: [
-    {
-      type: "field_input",
-      name: "frequency",
-      text: "C#4",
-    },
     {
       type: "field_dropdown",
       name: "shape",
       options: shapeOptions,
     },
   ],
+  colour: '%{BKY_SYNTH_HUE}',
   previousStatement: null,
   nextStatement: null,
 }
@@ -31,12 +27,10 @@ Blockly.Blocks.ToneSynth.init = function () {
 
 Blockly.JavaScript.ToneSynth = (block) => {
   const shape = block.getFieldValue("shape");
-  const frequency = block.getFieldValue("frequency");
 
   if (typeof shape === "undefined") {
     return "";
   } else {
-    return `
-  const synth = new Tone.Synth({oscillator: { frequency: '${frequency}', type: '${shape}' }}).toDestination();`;
+    return `const synth = new Tone.Synth({oscillator: { type: '${shape}' }}).toDestination();\n`;
   }
 };

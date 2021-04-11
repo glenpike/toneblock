@@ -8,7 +8,7 @@ const shapeOptions = [
   ["sawtooth","sawtooth1"]
 ]
 Blockly.Blocks.PlayNote = {
-  message0: "set frequency to %1, duration to %2",
+  message0: "Play Note: %1 for %2",
   args0: [
     {
       type: "field_input",
@@ -21,6 +21,7 @@ Blockly.Blocks.PlayNote = {
       text: "8n",
     },
   ],
+  colour: '%{BKY_NOTE_HUE}',
   previousStatement: null,
   nextStatement: null,
 }
@@ -36,7 +37,6 @@ Blockly.JavaScript.PlayNote = (block) => {
   if (typeof frequency === "undefined") {
     return "";
   } else {
-    return `
-    synth.triggerAttackRelease('${frequency}', '${duration}');`;
+    return `synth.triggerAttackRelease('${frequency}', '${duration}');\n`;
   }
 };
