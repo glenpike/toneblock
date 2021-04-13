@@ -22,11 +22,11 @@ function sleep(milliseconds) {
 
 function handlePlay(event) {
     let code = Blockly.JavaScript.workspaceToCode(Blockly.getMainWorkspace());
-    console.log('handlePlay ', code);
+    console.log(`handlePlay\n\n${code}\n\n`);
     try {
-        eval(code);
+      eval(code);
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
 }
 window.onload = () => {

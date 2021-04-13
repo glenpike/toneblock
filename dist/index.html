@@ -19,8 +19,7 @@
       <block type="Rest"></block>
     </category>
     <category name="Control" colour="%{BKY_LOOPS_HUE}">
-      <block type="Connect"></block>
-      <block type="Run"></block>
+      <block type="ToneBlock"></block>
       <block type="controls_repeat_ext">
         <value name="TIMES">
           <block type="math_number">
@@ -28,20 +27,12 @@
           </block>
         </value>
       </block>
-      <block type="controls_whileUntil">
-        <value name="BOOL">
-          <block type="logic_boolean">
-            <field name="BOOL">TRUE</field>
-          </value>
-        </field>
-      </block>
-      <block type="controls_flow_statements"></block>
     </category>
     <category name="Variables" custom="VARIABLE" colour="%{BKY_VARIABLES_HUE}">
     </category>
   </xml>
   <xml id="workspaceBlocks" style="display: none">
-    <block type="Run"></block>
+    <block type="ToneBlock"></block>
   </xml>
   <input type="button" id="js-play" value="Play">
 </body>

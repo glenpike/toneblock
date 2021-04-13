@@ -2,20 +2,14 @@ const Blockly = require('blockly');
 const Tone = require('tone');
 
 const shapeOptions = [
-  ['default',''],
   ['sine','sine'],
   ['square','square'],
   ['triangle','triangle'],
   ['sawtooth','sawtooth']
 ]
 Blockly.Blocks.MembraneSynth = {
-  message0: 'Tone.MembraneSynth = %1 wave type: %2',
+  message0: 'Tone.MembraneSynth: wave type: %1',
   args0: [
-    {
-      type: 'field_input',
-      name: 'VAR',
-      text: 'kick',
-    },
     {
       type: 'field_dropdown',
       name: 'shape',
@@ -25,6 +19,7 @@ Blockly.Blocks.MembraneSynth = {
   colour: '%{BKY_SYNTH_HUE}',
   previousStatement: null,
   nextStatement: null,
+  extensions: ['audioNode_VariableNames'],
 }
 
 Blockly.Blocks.MembraneSynth.init = function () {
@@ -32,17 +27,14 @@ Blockly.Blocks.MembraneSynth.init = function () {
 };
 
 Blockly.JavaScript.MembraneSynth = (block) => {
-  let VAR = block.getFieldValue('VAR');
+  const varName = block.getAudioNodeVarName(block);
   const shape = block.getFieldValue('shape');
 
   if (typeof shape === 'undefined') {
     return '';
   } else {
-    let code = ''
-    if(VAR && VAR.length) {
-      block.workspace.createVariable(VAR, 'node')
-      code += `const ${VAR} = `
-    }
-    return code + `new Tone.MembraneSynth({oscillator: { type: '${shape}' }}).toDestination();\n`;
+    return `
+const ${varName} = new Tone.MembraneSynth({oscillator: { type: '${shape}' }}).toDestination();
+const synth = ${varName}\n`;
   }
 };

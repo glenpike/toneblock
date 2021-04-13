@@ -31,6 +31,7 @@ Blockly.JavaScript.PlayNote = (block) => {
   if (typeof frequency === "undefined") {
     return "";
   } else {
-    return `synth.triggerAttackRelease('${frequency}', '${duration}');\n`;
+    return `
+synth.triggerAttackRelease('${frequency}', '${duration}');\n`;
   }
 };
