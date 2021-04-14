@@ -2,10 +2,48 @@
 <html>
 <head>
 	<title>Starter</title>
+  <style>
+    html,
+    body {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+    .wrapper {
+      padding: 10px;
+      width: calc(100% - 20px);
+      height: calc(100% - 20px);
+      display: flex;
+      flex-flow: column;
+    }
+    .buttons {
+      flex: 0 1 auto;
+      padding-bottom: 10px;
+    }
+    .blocklyArea {
+      position: relative;
+      flex: 1 1 auto;
+    }
+    .blocklyDiv {
+      position: absolute;
+    }
+  </style>
 </head>
 <body>
   <script src="bundle.js"></script>
-  <div id="blocklyDiv" style="width:1200px;height:480px;"></div>
+  <div class="wrapper">
+    <div class="buttons">
+      <input type="button" id="js-play" value="Play">
+      <!--<input type="button" id="js-stop" value="Stop">-->
+      <input type="button" id="js-new" value="New">
+      <input type="button" id="js-save" value="Save">
+      <span>Restore doesn't work, sorry.</span>
+      <!--<input type="button" id="js-restore" value="Restore">-->
+    </div>
+    <div class="blocklyArea" id="blocklyArea">
+      <div class="blocklyDiv" id="blocklyDiv"></div>
+    </div>
+  </div>
   <xml id="toolbox" style="display: none">
     <category name="Sound Generators" expanded="true" colour="%{BKY_SYNTH_HUE}">
       <block type="ToneSynth"></block>
@@ -34,6 +72,5 @@
   <xml id="workspaceBlocks" style="display: none">
     <block type="ToneBlock"></block>
   </xml>
-  <input type="button" id="js-play" value="Play">
 </body>
 </html>

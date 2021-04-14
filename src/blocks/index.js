@@ -21,22 +21,25 @@ ToneBlocks.AUDIO_NODE_MIXIN = {
           console.log('Not sure what event is? ', e)
           return
         }
-        console.log('BLOCK_MOVE  ')
-        let num = 1;
-        const existingVars = this.workspace.getVariablesOfType(this.type).sort((a, b) =>  a.name - b.name );
-        if(existingVars.length) {
-          const lastVar = existingVars.pop().name;
-          num = Number(lastVar.replace(`${this.type}_`, '')) + 1
-        }
-
-        const newVar = this.workspace.createVariable(`${this.type}_${num}`, this.type)
-        this.audioVarId = newVar.getId()
+        this.createVariable(this)
       } else if(e.type === Blockly.Events.BLOCK_DELETE) {
+        console.log('deleting variable for block ', this)
         this.workspace.deleteVariableById(this.audioVarId)
       }
     } else if(e.type === Blockly.Events.VAR_RENAME) {
       console.log('VAR_RENAME ', e, this.workspace.getVariableById(this.audioVarId))
     }
+  },
+  createVariable(block) {
+    let num = 1;
+    const existingVars = block.workspace.getVariablesOfType(block.type).sort((a, b) =>  a.name - b.name );
+    if(existingVars.length) {
+      const lastVar = existingVars.pop().name;
+      num = Number(lastVar.replace(`${block.type}_`, '')) + 1
+    }
+
+    const newVar = this.workspace.createVariable(`${block.type}_${num}`, block.type)
+    block.audioVarId = newVar.getId()
   }
 }
 
