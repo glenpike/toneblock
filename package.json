@@ -7,7 +7,8 @@
     "serve": "http-server dist/",
     "livereload": "livereload dist/",
     "dev": "npm run serve & npm run livereload & npm run watch",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "build": "browserify src/*.js -o dist/bundle.js"
   },
   "keywords": [],
   "author": "github@glenpike.co.uk",
