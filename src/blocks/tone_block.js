@@ -39,7 +39,16 @@ Blockly.JavaScript.ToneBlock = (block) => {
     return '';
   } else {
     return `
-(async function() {
+(function() {
+  function* timingGenerator() {
+    let time = Tone.now();
+   
+    while (true) {
+      increment = yield time
+      time += Tone.Time(increment).toSeconds();
+    }
+  }
+  const noteStartTime = timingGenerator();
   ${audio}
   ${connections}
   ${music}

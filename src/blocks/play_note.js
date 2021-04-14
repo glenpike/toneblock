@@ -32,6 +32,6 @@ Blockly.JavaScript.PlayNote = (block) => {
     return "";
   } else {
     return `
-synth.triggerAttackRelease('${frequency}', '${duration}');\n`;
+synth.triggerAttackRelease('${frequency}', '${duration}', noteStartTime.next('${duration}').value);\n`;
   }
 };

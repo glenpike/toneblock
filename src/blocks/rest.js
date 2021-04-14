@@ -25,6 +25,6 @@ Blockly.JavaScript.Rest = (block) => {
   if (typeof duration === 'undefined') {
     return '';
   } else {
-    return `await sleep(Tone.Frequency('${duration}').toMilliseconds());\n`
+    return `noteStartTime.next('${duration}');\n`
   }
 };
