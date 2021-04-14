@@ -1,37 +1,41 @@
-const Blockly = require('blockly');
-const Tone = require('tone');
+const Blockly = require('blockly')
+// const Tone = require('tone')
 
-Blockly.Blocks.PlayNote = {
-  message0: "Play Note: %1 for %2",
-  args0: [
-    {
-      type: "field_input",
-      name: "frequency",
-      text: "C#4",
-    },
-    {
-      type: "field_input",
-      name: "duration",
-      text: "8n",
-    },
-  ],
-  colour: '%{BKY_NOTE_HUE}',
-  previousStatement: null,
-  nextStatement: null,
+const playNoteJSON = {
+	message0: 'Play Note: %1 for %2',
+	args0: [
+		{
+			type: 'field_input',
+			name: 'frequency',
+		},
+		{
+			type: 'input_value',
+			name: 'duration',
+		},
+	],
+	colour: '%{BKY_NOTE_HUE}',
+	previousStatement: null,
+	nextStatement: null,
+	helpUrl:
+		'https://tonejs.github.io/docs/14.7.77/Synth.html#triggerAttackRelease',
+	tooltip:
+		'Will call triggerAttackRelease on the "Synth" used in the "Tone Block"',
 }
 
-Blockly.Blocks.PlayNote.init = function () {
-  this.jsonInit(Blockly.Blocks.PlayNote);
-};
+Blockly.Blocks.PlayNote = {
+  init: function() {
+    this.jsonInit(playNoteJSON)
+  }
+}
 
 Blockly.JavaScript.PlayNote = (block) => {
-  const frequency = block.getFieldValue("frequency");
-  const duration = block.getFieldValue("duration");
-  
-  if (typeof frequency === "undefined") {
-    return "";
-  } else {
-    return `
-synth.triggerAttackRelease('${frequency}', '${duration}', noteStartTime.next('${duration}').value);\n`;
-  }
-};
+	const frequency = block.getFieldValue('frequency')
+	const duration = Blockly.JavaScript.valueToCode(block, 'duration', Blockly.JavaScript.ORDER_ATOMIC) || '8n'
+
+	if (typeof frequency === 'undefined') {
+		return ''
+	} else {
+		return `
+synth.triggerAttackRelease('${frequency}', '${duration}', noteStartTime.next('${duration}').value);\n`
+	}
+}

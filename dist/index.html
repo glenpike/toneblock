@@ -37,27 +37,52 @@
       <!--<input type="button" id="js-stop" value="Stop">-->
       <input type="button" id="js-new" value="New">
       <input type="button" id="js-save" value="Save">
-      <span>Restore doesn't work, sorry.</span>
-      <!--<input type="button" id="js-restore" value="Restore">-->
+      <!--<span>Restore doesn't work, sorry.</span>-->
+      <input type="button" id="js-restore" value="Restore">
     </div>
     <div class="blocklyArea" id="blocklyArea">
       <div class="blocklyDiv" id="blocklyDiv"></div>
     </div>
   </div>
   <xml id="toolbox" style="display: none">
+    <category name="Run" expanded="true" colour="%{BKY_SYNTH_HUE}">
+      <block type="ToneBlock"></block>
+    </category>      
     <category name="Sound Generators" expanded="true" colour="%{BKY_SYNTH_HUE}">
       <block type="ToneSynth"></block>
       <block type="MembraneSynth"></block>  
     </category>
     <category name="Sound Effects" colour="%{BKY_FX_HUE}">
-      <block type="FeedbackDelay"></block>
+      <block type="FeedbackDelay">
+        <value name="delayTime">
+          <block type="Time">
+            <field name="TEXT">8n</field>
+          </block>
+        </value>
+        <field name="feedback">0.5</field>
+      </block>
     </category>
-    <category name="Notes" colour="%{BKY_NOTE_HUE}">
-      <block type="PlayNote"></block>
-      <block type="Rest"></block>
+    <category name="Music" colour="%{BKY_NOTE_HUE}">
+      <block type="PlayNote">
+        <field name="frequency">C#4</field>
+        <value name="duration">
+          <block type="Time">
+            <field name="TEXT">8n</field>
+          </block>
+        </value>
+      </block>
+      <block type="Rest">
+        <value name="duration">
+          <block type="Time">
+            <field name="TEXT">8n</field>
+          </block>
+        </value>
+      </block>
+      <block type="Time">
+        <field name="TEXT">1.0</field>
+      </block>
     </category>
-    <category name="Control" colour="%{BKY_LOOPS_HUE}">
-      <block type="ToneBlock"></block>
+    <category name="Loops" colour="%{BKY_LOOPS_HUE}">
       <block type="controls_repeat_ext">
         <value name="TIMES">
           <block type="math_number">
