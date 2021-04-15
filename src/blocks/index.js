@@ -71,6 +71,7 @@ Blockly.Extensions.registerMutator(
 
 const ToneSynth = require('./tone_synth')
 const MembraneSynth = require('./membrane_synth')
+const NoiseSynth = require('./noise_synth')
 const FeedbackDelay = require('./feedback_delay')
 const Filter = require('./filter')
 const Distortion = require('./distortion')
