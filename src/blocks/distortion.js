@@ -1,20 +1,26 @@
 const Blockly = require('blockly')
 const Tone = require('tone')
 
-const feedbackDelayJSON = {
-	message0: 'Delay delayTime: %1 feedback: %2 wet: %3, source: %4',
+const oversamplingOptions = [
+	['2x', '2x'],
+	['4x', '4x'],
+]
+
+const distortionJSON = {
+	message0: 'Distortion amount: %1 oversampling: %2 wet: %3 source: %4',
 	args0: [
 		{
-			type: 'input_value',
-			name: 'delayTime',
-		},
-		{
 			type: 'field_input',
-			name: 'feedback',
-			min: 0.0,
+			name: 'amount',
+			min: 0,
 			max: 1.0,
 		},
     {
+			type: 'field_dropdown',
+			name: 'oversampling',
+			options: oversamplingOptions,
+		},
+		{
 			type: 'field_input',
 			name: 'wet',
 			min: 0.0,
@@ -23,7 +29,7 @@ const feedbackDelayJSON = {
 		{
 			type: 'input_statement',
 			name: 'Source',
-      check: ['ToneSynth', 'FeedbackDelay']
+      check: ['ToneSynth', 'FeedbackDelay', 'Filter']
 		}
 	],
 	colour: '%{BKY_FX_HUE}',
@@ -31,19 +37,19 @@ const feedbackDelayJSON = {
 	nextStatement: null,
 	extensions: ['audioNode_VariableNames'],
 	mutator: 'audioNode_SaveVariables',
-  helpUrl: 'https://tonejs.github.io/docs/14.7.77/FeedbackDelay',
-	tooltip: 'An audio delay effect with feedback so it keeps echoing if you turn it up',
+  helpUrl: 'https://tonejs.github.io/docs/14.7.77/Distortion',
+	tooltip: 'An audio distortion effect that makes your sound crunchy',
 }
 
-Blockly.Blocks.FeedbackDelay = {
+Blockly.Blocks.Distortion = {
 	init: function () {
-		this.jsonInit(feedbackDelayJSON)
+		this.jsonInit(distortionJSON)
 	}
 }
 
-Blockly.JavaScript.FeedbackDelay = (block) => {
-	const delayTime = Blockly.JavaScript.valueToCode(block, 'delayTime', Blockly.JavaScript.ORDER_ATOMIC) || '8n'
-	const feedback = block.getFieldValue('feedback')
+Blockly.JavaScript.Distortion = (block) => {
+	const amount = block.getFieldValue('amount')
+	const oversampling = block.getFieldValue('oversampling')
 	const wet = block.getFieldValue('wet') || 0.5
 	const sourceStatement = Blockly.JavaScript.statementToCode(block, 'Source')
 	const varName = block.getAudioNodeVarName(block)
@@ -58,12 +64,12 @@ Blockly.JavaScript.FeedbackDelay = (block) => {
 		return str
 	}, '')
 
-	if (typeof delayTime === 'undefined') {
+	if (typeof amount === 'undefined') {
 		return ''
 	} else {
 		return `
 ${sourceStatement}
-const ${varName} = new Tone.FeedbackDelay({delayTime: '${delayTime}', feedback: ${feedback}, wet: ${wet}});
+const ${varName} = new Tone.Distortion({distortion: '${amount}', oversampling: '${oversampling}', wet: '${wet}'});
 	${connections}\n`
 	}
 }
