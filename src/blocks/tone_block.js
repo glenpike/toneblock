@@ -2,10 +2,11 @@ const Blockly = require('blockly')
 
 const toneBlockJSON = {
 	type: 'ToneBlock',
-	message0: "Tone Block: %1 Generators or Effects %2 Music %3",
+	message0: "Tone Block, volume: %1 Generators or Effects %2 Music %3",
 	args0: [
 		{
-			type: "input_dummy"
+			type: 'field_input',
+			name: 'volume',
 		},
 		{
 			type: "input_statement",
@@ -30,6 +31,7 @@ Blockly.Blocks.ToneBlock = {
 }
 
 Blockly.JavaScript.ToneBlock = (block) => {
+	const volume = block.getFieldValue('volume') || 0.75
 	const audio = Blockly.JavaScript.statementToCode(block, 'Audio')
 	const music = Blockly.JavaScript.statementToCode(block, 'Music')
 
@@ -37,7 +39,7 @@ Blockly.JavaScript.ToneBlock = (block) => {
 	const connections = children.reduce((str, child) => {
 		if(child.isAudio) {
 			const childVAR = child.getAudioNodeVarName(child)
-			str += `${childVAR}.toDestination()\n`
+			str += `${childVAR}.connect(gainNode)\n`
 		}
 		return str
 	}, '')
@@ -56,7 +58,9 @@ Blockly.JavaScript.ToneBlock = (block) => {
 	}
 	const noteStartTime = timingGenerator();
 	${audio}
+  const gainNode = new Tone.Gain('${volume}');
 	${connections}
+  gainNode.toDestination();
 	${music}
 })();\n`
 	}

@@ -46,7 +46,12 @@
   </div>
   <xml id="toolbox" style="display: none">
     <category name="Run" expanded="true" colour="%{BKY_SYNTH_HUE}">
-      <block type="ToneBlock"></block>
+      <block type="ToneBlock">
+        <field name="volume">0.75</field>
+      </block>
+      <value name="Audio">
+        <block type="ToneSynth"></block>
+      </value>
     </category>      
     <category name="Sound Generators" expanded="true" colour="%{BKY_SYNTH_HUE}">
       <block type="ToneSynth"></block>
@@ -54,6 +59,11 @@
       <block type="MembraneSynth"></block>  
     </category>
     <category name="Sound Effects" colour="%{BKY_FX_HUE}">
+      <block type="Freeverb">
+        <field name="roomSize">0.5</field>
+        <field name="dampening">1000</field>
+        <field name="wet">0.5</field>
+      </block>
       <block type="FeedbackDelay">
         <value name="delayTime">
           <block type="Time">
@@ -105,7 +115,22 @@
     </category>
   </xml>
   <xml id="workspaceBlocks" style="display: none">
-    <block type="ToneBlock"></block>
+    <block type="ToneBlock">
+      <field name="volume">0.75</field>
+      <statement name="Audio">
+        <shadow type="ToneSynth"></shadow>
+      </statement>
+      <statement name="Music">
+        <shadow type="PlayNote">
+          <field name="frequency">C#4</field>
+          <value name="duration">
+            <shadow type="Time">
+              <field name="TEXT">8n</field>
+            </shadow>
+          </value>
+        </shadow>
+      </statement>
+    </block>
   </xml>
 </body>
 </html>
