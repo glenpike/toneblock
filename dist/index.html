@@ -61,7 +61,7 @@
     <category name="Sound Effects" colour="%{BKY_FX_HUE}">
       <block type="Freeverb">
         <field name="roomSize">0.5</field>
-        <field name="dampening">1000</field>
+        <field name="dampening">15000</field>
         <field name="wet">0.5</field>
       </block>
       <block type="FeedbackDelay">
@@ -75,6 +75,11 @@
       </block>
       <block type="Filter">
         <field name="frequency">1000</field>
+        <field name="Q">0.5</field>
+      </block>
+      <block type="AutoFilter">
+        <field name="frequency">4n</field>
+        <field name="baseFrequency">1000</field>
         <field name="Q">0.5</field>
       </block>
       <block type="Distortion">
