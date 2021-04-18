@@ -82,7 +82,7 @@ Blockly.JavaScript.AutoFilter = (block) => {
 	} else {
 		return `
 ${sourceStatement}
-const ${varName} = new Tone.AutoFilter({frequency: '${frequency}', baseFrequency: '${baseFrequency}', filter: {type: '${type}', Q: ${Q}}}).start();
+const ${varName} = new Tone.AutoFilter({frequency: '${frequency}', baseFrequency: '${baseFrequency}', depth: 1.0, filter: {type: '${type}', Q: ${Q}}}).start();
 // ${varName}.filter.rolloff = -24;
 	${connections}\n`
 	}
