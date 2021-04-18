@@ -70,6 +70,7 @@ Blockly.Extensions.registerMutator(
 )
 
 const ToneSynth = require('./tone_synth')
+const FMSynth = require('./fm_synth')
 const MembraneSynth = require('./membrane_synth')
 const NoiseSynth = require('./noise_synth')
 const Freeverb = require('./freeverb')
