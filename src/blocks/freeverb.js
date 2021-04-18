@@ -45,7 +45,7 @@ Blockly.Blocks.Freeverb = {
 
 Blockly.JavaScript.Freeverb = (block) => {
 	const roomSize = block.getFieldValue('roomSize') || '0.5'
-	const dampening = block.getFieldValue('dampening') || '15000'
+	const dampening = block.getFieldValue('dampening') || '8000'
 	const wet = block.getFieldValue('wet') || 0.5
 	const sourceStatement = Blockly.JavaScript.statementToCode(block, 'Source')
 	const varName = block.getAudioNodeVarName(block)
