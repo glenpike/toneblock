@@ -18,9 +18,8 @@ Blockly.Theme.defineTheme('toneblock', {
 
 function handlePlay(event) {
 	let code = Blockly.JavaScript.workspaceToCode(Blockly.getMainWorkspace())
-	console.log(`handlePlay\n\n${code}\n\n`)
-  // Tone.Transport.stop()
-  // Tone.Transport.dispose()
+	console.log('handlePlay')
+  console.log(`\n\n${code}\n\n`)
 	try {
 		eval(code)
 	} catch (error) {
